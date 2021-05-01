@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+<script>
+
+  //1.抓到按鍵輸出對應到按到div
+  //2.如何撥放聲音
+  //3.按下按鍵對應到他的聲音
+
+
+  window.addEventListener("keydown", function (e){
+    // console.log(e);
+    // console.log(e.keyCode);
+    let x = e.keyCode;
+    let keyArr = document.querySelectorAll('.key');
+    let audioArrLike = document.getElementsByTagName('audio');
+    let audioArr = [...audioArrLike];  //類陣列轉陣列 第一種方式
+    // Array.from(audioArrLike);  //類陣列轉陣列 第二種方式
+    // console.log(audioArrLike);
+    // console.log(audioArr);
+    audioArr.forEach(function (item,index) {
+      let audioValue = item.getAttribute("data-key");
+      // console.log(audioValue);
+      if (audioValue == x){
+        item.setAttribute("autoplay"," ");
+        console.log(item);
+        item.currentTime = 0;
+        item.play();
+      };
+    });
+    keyArr.forEach(function (item,index) {
+      let keyValue = item.getAttribute("data-key");
+      // console.log(item);
+      // console.log(keyvalue);
+      if (keyValue == x){
+        // console.log(item);
+        item.classList.add("playing");
+        let timer1 = setTimeout(function () {
+        item.classList.remove("playing");
+        },100);
+      };
+    });
+
+  }) 
+
+</script>
+
+
+</body>
+</html>
