@@ -17,6 +17,35 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+
+fetch(endpoint)
+.then(function (response) {
+  console.log(response);
+  return response.text();
+}).then(function (result) {
+  var allDataJson = JSON.parse(result);
+  // 取出inpur值
+  var searchInput = document.querySelector('.search');  
+  searchInput.addEventListener('input',function (e) {
+    var suggestions = document.querySelector('.suggestions');
+    var searchInputValue = e.target.value;
+    suggestions.innerHTML = '';
+    console.log(searchInputValue);
+    allDataJson.forEach(function (allData) {
+      // 拿出每一個城市.國家.人口
+      var city = allData['city'];
+      var state = allData['state'];
+      var population = allData['population'];
+
+      
+
+    });
+  })
+
+  
+  
+})
+
 </script>
 </body>
 </html>
